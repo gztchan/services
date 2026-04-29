@@ -1,0 +1,28 @@
+[project]
+name = "providence-k8s"
+version = "0.1.0"
+description = "K8s Jobs API for Providence"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "kubernetes>=32.0.0",
+    "pydantic-settings>=2.7.0"
+]
+
+[dependency-groups]
+dev = [
+    "poethepoet>=0.41.0",
+    "pytest>=7.0.0"
+]
+
+[tool.poetry.requires-plugins]
+poethepoet = ">=0.41.0"
+
+[tool.poe.tasks.test]
+cmd = "pytest --log-cli-level=DEBUG -s"
+
+[tool.setuptools.package-dir]
+providence_k8s = "./src"
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"

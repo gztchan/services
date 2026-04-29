@@ -1,0 +1,44 @@
+[project]
+name = "providence-services"
+version = "0.1.0"
+description = "Browser session controller: K8s Jobs API + PostgreSQL state"
+requires-python = ">=3.12"
+dependencies = [
+    "providence-database",
+    "asyncpg>=0.30.0",
+    "fastapi>=0.136.0",
+    "kubernetes>=32.0.0",
+    "pydantic-settings>=2.7.0",
+    "sqlalchemy[asyncio]>=2.0.36",
+    "uvicorn>=0.45.0",
+]
+
+[tool.uv]
+package = false
+
+[dependency-groups]
+dev = [
+    "poethepoet>=0.41.0",
+]
+
+[tool.poetry.requires-plugins]
+poethepoet = ">=0.41.0"
+
+[tool.uv.workspace]
+members = [
+    "apps/api",
+    "apps/edge",
+    "packages/data",
+    "packages/k8s",
+]
+
+[tool.uv.sources]
+providence-api = { workspace = true }
+providence-edge = { workspace = true }
+providence-data = { workspace = true }
+providence-k8s = { workspace = true }
+
+[tool.uv.sources."providence-database"]
+git = "https://github.com/gztchan/database.git"
+subdirectory = "python"
+# path = "../database/python"
