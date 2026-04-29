@@ -1,0 +1,30 @@
+[project]
+name = "providence-edge"
+version = "0.1.0"
+description = "Edge service: Proxy HTTP/WS requests to browser jobs"
+requires-python = ">=3.12"
+dependencies = [
+    "providence-data",
+    "fastapi>=0.136.0",
+    "pydantic-settings>=2.7.0",
+    "uvicorn>=0.45.0",
+    "httpx>=0.28.1",
+    "websockets>=16.0",
+]
+
+[tool.uv]
+package = false
+
+[dependency-groups]
+dev = [
+    "poethepoet>=0.41.0",
+]
+
+[tool.poetry.requires-plugins]
+poethepoet = ">=0.41.0"
+
+[tool.poe.tasks.dev]
+cmd = "dotenv -f .env run python -m src.main"
+
+[tool.poe.tasks.start]
+cmd = "uv run python -m src.main"
